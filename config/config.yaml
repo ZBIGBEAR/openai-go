@@ -1,0 +1,3 @@
+openai:
+  open_api_key: "YOUR_OPEN_API_KEY"
+  host: "https://api.openai.com/v1/"
