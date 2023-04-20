@@ -11,7 +11,7 @@ func (o *openAI) Completions(ctx context.Context, prompt string) (*model.Complet
 	url := o.getCompletionsURL()
 	req := CompletionsReq{
 		Model:       "text-davinci-003",
-		Prompt:      "Say this is a test",
+		Prompt:      prompt,
 		MaxTokens:   7,
 		Temperature: 0,
 		TopP:        1,
