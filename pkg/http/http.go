@@ -51,6 +51,7 @@ func New(cfg *Config, opts ...Option) Http {
 	client.CheckRetry = func(ctx context.Context, resp *http.Response, err error) (bool, error) {
 		return false, err
 	}
+	client.Logger = nil
 	return &innerHttp{
 		cfg:    cfg,
 		log:    common.NewLog(),

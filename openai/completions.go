@@ -15,7 +15,7 @@ func (o *openAI) Completions(ctx context.Context, prompt string) (*model.Complet
 		MaxTokens:   7,
 		Temperature: 0,
 		TopP:        1,
-		N:           1,
+		N:           o.replyMessageCount,
 		Stream:      false,
 		Logprobs:    nil,
 		Stop:        "\n",

@@ -7,8 +7,6 @@ import (
 	"openai-go/config"
 	"openai-go/openai/model"
 	"openai-go/pkg/http"
-	"os"
-	"strings"
 	"sync"
 )
 
@@ -16,16 +14,18 @@ type OpenAI interface {
 	Models(ctx context.Context) ([]*model.Model, error)
 	Model(ctx context.Context, modelID string) (*model.Model, error)
 	Completions(ctx context.Context, prompt string) (*model.Completion, error)
-	ChatCompletions(ctx context.Context, content string, count int) ([]string, error)
-	Images(ctx context.Context, prompt string, count int) ([]string, error)
+	ChatCompletions(ctx context.Context, content string) ([]string, error)
+	Images(ctx context.Context, prompt string) ([]string, error)
 	Embeddings(ctx context.Context, input string) (*model.Embeddings, error)
 	Moderations(ctx context.Context, input string) (*model.Moderations, error)
 }
 
 type openAI struct {
-	host          string
-	authorization string
-	httpClient    http.Http
+	host              string
+	temperature       float64
+	replyMessageCount int
+	authorization     string
+	httpClient        http.Http
 }
 
 const (
@@ -34,40 +34,25 @@ const (
 
 var _ OpenAI = &openAI{}
 
-func New(cfg *config.Config) OpenAI {
+func New(cfg *config.OpenAI, options ...Option) OpenAI {
 	if cfg == nil {
-		cfg = &config.Config{}
+		cfg = &config.OpenAI{}
 	}
 
-	host := cfg.OpenAI.Host
-	if host == "" {
-		host = defaultOpenAIHost
-	} else {
-		if !strings.HasSuffix(cfg.OpenAI.Host, common.UrlSeperator) {
-			host = cfg.OpenAI.Host + common.UrlSeperator
-		} else {
-			host = cfg.OpenAI.Host
-		}
-	}
-
-	openApiKey := cfg.OpenAI.OpenAPIKey
-	if openApiKey == "" {
-		openApiKey := os.Getenv(common.OpenAPIKey)
-		if openApiKey == "" {
-			panic("open api key is empty")
-		}
-
-		cfg.OpenAI.OpenAPIKey = openApiKey
+	opts := []Option{withDefaultHost(), withEnvOpenApiKey()}
+	opts = append(opts, options...)
+	for i := range opts {
+		opts[i](cfg)
 	}
 
 	httpConfig := &http.Config{
-		Authorization: fmt.Sprintf("%s %s", common.Bearer, cfg.OpenAI.OpenAPIKey),
+		Authorization: fmt.Sprintf("%s %s", common.Bearer, cfg.OpenAPIKey),
 	}
 	httpClient := http.New(httpConfig, http.TimeOutOption(10))
 
 	return &openAI{
-		host:          host,
-		authorization: cfg.OpenAI.OpenAPIKey,
+		host:          cfg.Host,
+		authorization: cfg.OpenAPIKey,
 		httpClient:    httpClient,
 	}
 }
@@ -97,12 +82,12 @@ func Completions(ctx context.Context, prompt string) (*model.Completion, error) 
 	return defaultOpenAI.Completions(ctx, prompt)
 }
 
-func ChatCompletions(ctx context.Context, content string, count int) ([]string, error) {
-	return defaultOpenAI.ChatCompletions(ctx, content, count)
+func ChatCompletions(ctx context.Context, content string) ([]string, error) {
+	return defaultOpenAI.ChatCompletions(ctx, content)
 }
 
-func Images(ctx context.Context, prompt string, count int) ([]string, error) {
-	return defaultOpenAI.Images(ctx, prompt, count)
+func Images(ctx context.Context, prompt string) ([]string, error) {
+	return defaultOpenAI.Images(ctx, prompt)
 }
 
 func Embeddings(ctx context.Context, input string) (*model.Embeddings, error) {

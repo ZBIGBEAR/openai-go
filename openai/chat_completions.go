@@ -7,18 +7,18 @@ import (
 	"openai-go/openai/model"
 )
 
-func (o *openAI) ChatCompletions(ctx context.Context, content string, count int) ([]string, error) {
+func (o *openAI) ChatCompletions(ctx context.Context, content string) ([]string, error) {
 	url := o.getChatCompletionsURL()
 	req := ChatCompletionsReq{
 		Model:       "gpt-3.5-turbo",
-		Temperature: 0.7,
+		Temperature: o.temperature,
 		Messages: []*model.Message{
 			{
 				Role:    "user",
 				Content: content,
 			},
 		},
-		N: count,
+		N: o.replyMessageCount,
 	}
 
 	reqBytes, err := json.Marshal(req)

@@ -7,11 +7,11 @@ import (
 	"openai-go/openai/model"
 )
 
-func (o *openAI) Images(ctx context.Context, prompt string, count int) ([]string, error) {
+func (o *openAI) Images(ctx context.Context, prompt string) ([]string, error) {
 	url := o.getImageURL()
 	req := CreateImageReq{
 		Prompt: prompt,
-		N:      count,
+		N:      o.replyMessageCount,
 		Size:   "1024x1024",
 	}
 

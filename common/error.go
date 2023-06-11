@@ -7,6 +7,9 @@ const (
 
 	NoOpenAPIKeyErrCode = 2
 	NoOpenAPIKeyErrMsg  = "没有配置open_api_key"
+
+	TimeOutErrCode = 3
+	TimeOutErrMsg  = "超时"
 )
 
 type Error struct {
@@ -23,6 +26,11 @@ var (
 	NoOpenAPIKeyErr = &Error{
 		Code: NoOpenAPIKeyErrCode,
 		Msg:  NoOpenAPIKeyErrMsg,
+	}
+
+	TimeOutErr = &Error{
+		Code: TimeOutErrCode,
+		Msg:  TimeOutErrMsg,
 	}
 )
 

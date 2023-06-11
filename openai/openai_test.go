@@ -48,18 +48,18 @@ func TestChatCompletions(t *testing.T) {
 	ai := getOpenAI()
 	ctx := context.Background()
 	prompt := "你是谁"
-	result, err := ai.ChatCompletions(ctx, prompt, 2)
+	result, err := ai.ChatCompletions(ctx, prompt)
 	assert.Nil(t, err)
-	assert.Equal(t, 2, len(result))
+	assert.Equal(t, 1, len(result))
 }
 
 func TestImages(t *testing.T) {
 	ai := getOpenAI()
 	ctx := context.Background()
 	prompt := "韩国美女"
-	result, err := ai.Images(ctx, prompt, 2)
+	result, err := ai.Images(ctx, prompt)
 	assert.Nil(t, err)
-	assert.Equal(t, 2, len(result))
+	assert.Equal(t, 1, len(result))
 }
 
 func TestEmbeddings(t *testing.T) {

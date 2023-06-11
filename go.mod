@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/hashicorp/go-retryablehttp v0.7.2
+	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.29.0
 	github.com/stretchr/testify v1.2.2
 )
