@@ -1,4 +1,4 @@
-module openai-go
+module github.com/ZBIGBEAR/openai-go
 
 go 1.19
 
