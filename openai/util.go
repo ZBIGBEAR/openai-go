@@ -2,7 +2,7 @@ package openai
 
 import (
 	"fmt"
-	"openai-go/common"
+	"github.com/ZBIGBEAR/openai-go/common"
 )
 
 func (o *openAI) getModelsURL() string {

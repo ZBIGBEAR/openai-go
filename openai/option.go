@@ -1,8 +1,8 @@
 package openai
 
 import (
-	"openai-go/common"
-	"openai-go/config"
+	"github.com/ZBIGBEAR/openai-go/common"
+	"github.com/ZBIGBEAR/openai-go/config"
 	"os"
 	"strings"
 )

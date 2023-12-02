@@ -3,10 +3,10 @@ package openai
 import (
 	"context"
 	"fmt"
-	"openai-go/common"
-	"openai-go/config"
-	"openai-go/openai/model"
-	"openai-go/pkg/http"
+	"github.com/ZBIGBEAR/openai-go/common"
+	"github.com/ZBIGBEAR/openai-go/config"
+	"github.com/ZBIGBEAR/openai-go/openai/model"
+	"github.com/ZBIGBEAR/openai-go/pkg/http"
 	"sync"
 )
 

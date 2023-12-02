@@ -1,6 +1,6 @@
 package openai
 
-import "openai-go/openai/model"
+import "github.com/ZBIGBEAR/openai-go/openai/model"
 
 type ModelsResponse struct {
 	Object model.ObjectType `json:"object"`

@@ -3,8 +3,8 @@ package openai
 import (
 	"context"
 	"encoding/json"
-	"openai-go/common"
-	"openai-go/openai/model"
+	"github.com/ZBIGBEAR/openai-go/common"
+	"github.com/ZBIGBEAR/openai-go/openai/model"
 )
 
 func (o *openAI) Models(ctx context.Context) ([]*model.Model, error) {

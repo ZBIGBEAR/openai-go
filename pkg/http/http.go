@@ -3,9 +3,9 @@ package http
 import (
 	"bytes"
 	"context"
+	"github.com/ZBIGBEAR/openai-go/common"
 	"github.com/hashicorp/go-retryablehttp"
 	"net/http"
-	"openai-go/common"
 
 	"time"
 )

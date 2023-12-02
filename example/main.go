@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"openai-go/common"
-	"openai-go/openai"
+	"github.com/ZBIGBEAR/openai-go/common"
+	"github.com/ZBIGBEAR/openai-go/openai"
 	"os"
 	"os/exec"
 )
