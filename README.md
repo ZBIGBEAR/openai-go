@@ -48,7 +48,7 @@ func main() {
 # Get Start
 下载代码
 ```
-git clone git@github.com:openfaas/faas.git
+git clone git@github.com:ZBIGBEAR/openai-go.git
 ```
 
 生成ai对象
